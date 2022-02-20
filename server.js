@@ -4,7 +4,9 @@ const exhbs = require('express-handlebars');
 const bodyParser = require('body-parser');
 const signInRoute = require('./routes/signIn');
 const signUpRoute = require('./routes/signUp');
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
+const userSchema = require('./models/users');
+
 // const Parser = require('rss-parser');
 const app = express();
 
@@ -24,6 +26,27 @@ mongoose.connect('mongodb+srv://alifromim:Mariam7-una@cluster0.9h7xo.mongodb.net
     .then(console.log('MongoDB is connected'))
     .catch(console.error());
 
+const userModel = mongoose.model('User', userSchema);
+
+// let user1 = new userModel({
+//     fname: 'String',
+//     lname: 'String',
+//     email: 'String',
+//     password: 'String',
+//     occupation: 'String',
+//     //dateOfBirth: Date,
+//     address: 'String',
+//     postalCode: 'String',
+//     city: 'String',
+//     province: 'String',
+//     country: 'String',
+//     cellNumber: 1111111,
+//     prefComm: 'String'
+// })
+
+// user1.save()
+//     .then(console.log('user was saved'))
+//     .catch(console.error());
 // **************************************************************
 
 // var dataFromRSS = [];
