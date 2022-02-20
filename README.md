@@ -6,6 +6,7 @@ The raw version is able to create user and log him/her in.
 yet to do:
 - connect with database (MongoDB)
 - add CRUD functions accessing the database
+- add back end data validation
 - ensure security by hashing password and https protocol
 - add functionality to send money among users
 - display information to the user using express hadnlebars (dashboard)
