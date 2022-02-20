@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema;
 
+
 const user = new Schema({
     fname: String,
     lname: String,
@@ -17,4 +18,6 @@ const user = new Schema({
     prefComm: String
 })
 
-module.exports = user;
+const userModel = mongoose.model('User', user);
+
+module.exports = userModel;

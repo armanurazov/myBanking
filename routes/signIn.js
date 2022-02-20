@@ -1,7 +1,8 @@
 const express = require('express');
 const route = express.Router();
+const userModel = require('../models/users');
 
-route.get('/', (req, res) =>{
+route.get('/', (req, res) => {
     res.render('signIn');
 })
 
@@ -11,28 +12,25 @@ route.post('/', (req, res) => {
 
     let errorMessage = 'User Not Found'
 
-    var users = [];
-    var obj = [];
-
-    users.push('{"email": "' + 'armanurazov.inbox@gmail.com' + '"}')
-    users.push('{"email": "' + 'armanurazov.inbox@gmail.com' + '"}')
-    users.push('{"email": "' + 'armanurazov.inbox@gmail.com' + '"}')
-
-    for (var i = 0; i < users.length; i++) {
-        obj[i] = JSON.parse(users[i])
-    }
-    function isFound() {
-        for (var i = 0; i < 3; i++) {
-            if (email == obj[i].email) 
-            return true;
+    userModel.findOne({ 'email': email }, 'email lname address', function (err, user) {
+        if (err) return handleError(err);
+        if(email==user.email){
+            res.render('dashboard', { email: email, address: user.address}) // add password validation
+        }else{
+            res.render('home', { errorMessage: errorMessage });
         }
-        return false;
-    }
-    if (isFound()) {
-        res.render('dashboard', { email: email })
-    } else {
-        res.render('home', { errorMessage: errorMessage });
-    }
+    });
+
+    // function isFound() {
+    //     if (email == emailFromDB)
+    //         {return true;}
+    //     return false;
+    // }
+    // if (isFound()) {
+    //     res.render('dashboard', { email: email })
+    // } else {
+    //     res.render('home', { errorMessage: errorMessage });
+    // }
 })
 
 module.exports = route;
