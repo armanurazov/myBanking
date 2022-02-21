@@ -1,4 +1,5 @@
 const express = require('express');
+const bcrypt = require('bcrypt');
 const route = express.Router();
 const userModel = require('../models/users');
 
@@ -10,27 +11,26 @@ route.post('/', (req, res) => {
     let email = req.body["sign-in-email"];
     let password = req.body["sign-in-password"];
 
-    let errorMessage = 'User Not Found'
+    // const salt = bcrypt.genSaltSync(10);
+    // const hash = bcrypt.hashSync(req.body["sign-in-password"], salt);  // password hashing 
 
-    userModel.findOne({ 'email': email }, 'email lname address', function (err, user) {
+    let errorMessage = '';
+
+    userModel.findOne({ 'email': email }, 'email password', function (err, user) {
         if (err) return handleError(err);
-        if(email==user.email){
-            res.render('dashboard', { email: email, address: user.address}) // add password validation
-        }else{
+        if (email == user.email) {
+            if (bcrypt.compareSync(password, user.password)) {       // function returns true if password matched the database hashed password
+                res.render('dashboard', { email: email}) 
+            } else {
+                //console.log(hash);
+                errorMessage = 'Invalid password'
+                res.render('home', { errorMessage: errorMessage });
+            };
+        } else {
+            errorMessage = 'User Not Found'
             res.render('home', { errorMessage: errorMessage });
         }
     });
-
-    // function isFound() {
-    //     if (email == emailFromDB)
-    //         {return true;}
-    //     return false;
-    // }
-    // if (isFound()) {
-    //     res.render('dashboard', { email: email })
-    // } else {
-    //     res.render('home', { errorMessage: errorMessage });
-    // }
 })
 
 module.exports = route;

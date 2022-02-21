@@ -14,7 +14,7 @@ const user = new Schema({
     city: String,
     province: String,
     country: String,
-    cellNumber: Number,
+    cellNumber: String,
     prefComm: String
 })
 
