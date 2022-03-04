@@ -1,2 +1,40 @@
-Hello Mr. 
+Hello Dear
 {{email}}<br>
+Your current balance is:
+{{balance}}<br><br>
+
+{{!-- {{#if }}
+
+{{/if}} --}}
+
+
+<div class="container">
+    <div class="row">
+        <div class="col transaction-div">
+            <a>Deposit money</a><br><br>
+            <form action='/dashboard' method="POST">
+                <label for="deposit-amoun">Amount to deposit:</label><br>
+                <input type="number" name="deposit-amount" id="deposit-amount"><br><br>
+                <input type="submit" value="Confirm action">
+            </form>
+        </div>
+        <div class="col transaction-div">
+            <a>Withdraw money</a><br><br>
+            <form action='/dashboard' method="POST">
+                <label for="withdraw-amount">Amount to withdraw:</label><br>
+                <input type="number" name="withdraw-amount" id="withdraw-amount"><br><br>
+                <input type="submit" value="Confirm action">
+            </form>
+        </div>
+        <div class="col transaction-div">
+            <a>Send money</a><br><br>
+            <form action='/dashboard' method="POST">
+                <label for="send-amount">Amount to send:</label><br>
+                <input type="number" name="send-amount" id="send-amount"><br>
+                <label for="send-email">Reciever email:</label><br>
+                <input type="email" name="send-email" id="send-email"><br><br>
+                <input type="submit" value="Confirm action">
+            </form>
+        </div>
+    </div>
+</div>

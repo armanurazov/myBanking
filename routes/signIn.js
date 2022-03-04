@@ -3,6 +3,9 @@ const bcrypt = require('bcrypt');
 const route = express.Router();
 const userModel = require('../models/users');
 
+var userEmail = 'not assigned';
+
+
 route.get('/', (req, res) => {
     res.render('signIn');
 })
@@ -11,18 +14,18 @@ route.post('/', (req, res) => {
     let email = req.body["sign-in-email"];
     let password = req.body["sign-in-password"];
 
-    // const salt = bcrypt.genSaltSync(10);
-    // const hash = bcrypt.hashSync(req.body["sign-in-password"], salt);  // password hashing 
-
     let errorMessage = '';
 
-    userModel.findOne({ 'email': email }, 'email password', function (err, user) {
+    userModel.findOne({ 'email': email }, 'email password balance', function (err, user) {
         if (err) return handleError(err);
         if (email == user.email) {
-            if (bcrypt.compareSync(password, user.password)) {       // function returns true if password matched the database hashed password
-                res.render('dashboard', { email: email}) 
+            if (bcrypt.compareSync(password, user.password)) {   // function returns true if password matched the database hashed password
+                req.session.user = user.email;
+                //res.render('dashboard', { email: user.email , balance: user.balance});
+                res.redirect('dashboard');
+                
+                console.log(req.session)
             } else {
-                //console.log(hash);
                 errorMessage = 'Invalid password'
                 res.render('home', { errorMessage: errorMessage });
             };
@@ -33,4 +36,6 @@ route.post('/', (req, res) => {
     });
 })
 
-module.exports = route;
+    module.exports = {route, userEmail};
+
+

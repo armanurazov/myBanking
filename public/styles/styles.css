@@ -5,3 +5,27 @@ body{
 form{
     font-size: 14px;
 }
+
+.header-div{
+    text-align: center;
+    margin: 3px;
+    border: 1px solid black;
+    border-radius: 25px;
+    padding: 15px;
+    margin: 15px;
+}
+
+.transaction-div{
+    border: 1px solid black;
+    border-radius: 25px;
+    text-align: center;
+    height: 300px;
+    margin: 40px;
+}
+.signin-div{
+    border: 1px solid black;
+    border-radius: 25px;
+    text-align: center;
+    padding: 30px;
+    margin: 30px;
+}

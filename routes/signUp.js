@@ -25,14 +25,18 @@ route.post('/', (req, res) => {
         province: req.body["sign-up-province"],
         country: req.body["sign-up-country"],
         cellNumber: req.body["sign-up-cell-number"],   //need to change the type from Number (to String?)
-        prefComm: req.body["sign-up-preferred-comm"]
+        prefComm: req.body["sign-up-preferred-comm"],
+        balance: 0   // instantiated with zero for a new user, will be able to top up in the dashboard
     })
+
+    let email = req.body["sign-up-email"];
+    let balance = 0;
 
     user1.save()
         .then(console.log('user was saved'))
         .catch(console.error());
 
-    res.send('Hello Mr. ' + req.body["sign-up-lname"])
+    res.render('dashboard', { email: email, balance: balance})
 })
 
 module.exports = route;

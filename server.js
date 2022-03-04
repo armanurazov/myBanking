@@ -1,9 +1,11 @@
-const PORT = 8080;
+const PORT = 8002;
 const express = require('express');
 const exhbs = require('express-handlebars');
 const bodyParser = require('body-parser');
+const session = require('express-session')
 const signInRoute = require('./routes/signIn');
 const signUpRoute = require('./routes/signUp');
+const dashboardRoute = require('./routes/dashboard');
 const mongoose = require('mongoose');
 const userSchema = require('./models/users');
 
@@ -11,6 +13,12 @@ const userSchema = require('./models/users');
 const app = express();
 
 app.use(express.static('public'))
+app.use(session({
+    secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: true }
+  }))
 
 app.engine('hbs', exhbs.engine({ extname: 'hbs' }));
 app.set('view engine', 'hbs');
@@ -34,8 +42,11 @@ app.get('/', (req, res) => {
     res.render('home');
 })
 
-app.use('/signin', signInRoute)
+app.use('/signin', signInRoute.route)
 
 app.use('/signup', signUpRoute)
 
-app.listen(PORT, console.log('Connected to port: ' + PORT));
+app.use('/dashboard', dashboardRoute)
+
+
+app.listen(process.env.PORT || PORT, console.log('Connected to port: ' + PORT));

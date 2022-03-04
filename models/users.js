@@ -15,7 +15,8 @@ const user = new Schema({
     province: String,
     country: String,
     cellNumber: String,
-    prefComm: String
+    prefComm: String,
+    balance: Number
 })
 
 const userModel = mongoose.model('User', user);
