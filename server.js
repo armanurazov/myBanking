@@ -2,30 +2,32 @@ const PORT = 8002;
 const express = require('express');
 const exhbs = require('express-handlebars');
 const bodyParser = require('body-parser');
-const session = require('express-session')
 const signInRoute = require('./routes/signIn');
 const signUpRoute = require('./routes/signUp');
 const dashboardRoute = require('./routes/dashboard');
 const mongoose = require('mongoose');
 const userSchema = require('./models/users');
+const clientSessions = require("client-sessions");
 
 // const Parser = require('rss-parser');
 const app = express();
 
 app.use(express.static('public'))
-app.use(session({
-    secret: 'keyboard cat',
-    resave: false,
-    saveUninitialized: true,
-    cookie: { secure: true }
-  }))
-
 app.engine('hbs', exhbs.engine({ extname: 'hbs' }));
 app.set('view engine', 'hbs');
 app.set('views', './views');
 
 app.use(bodyParser.urlencoded({
     extended: true
+}));
+
+// ********************** authantication  ***********************
+
+app.use(clientSessions({
+    cookieName: "session", // this is the object name that will be added to 'req'
+    secret: "week10example_web322", // this should be a long un-guessable string.
+    duration: 2 * 60 * 1000, // duration of the session in milliseconds (2 minutes)
+    activeDuration: 1000 * 60 // the session will be extended by this many ms each request (1 minute)
 }));
 
 // ********************* mongoDB connection *********************

@@ -29,14 +29,22 @@ route.post('/', (req, res) => {
         balance: 0   // instantiated with zero for a new user, will be able to top up in the dashboard
     })
 
-    let email = req.body["sign-up-email"];
-    let balance = 0;
-
     user1.save()
         .then(console.log('user was saved'))
         .catch(console.error());
 
-    res.render('dashboard', { email: email, balance: balance})
+    req.session.user = {
+        email: req.body["sign-up-email"],
+        balance: 0,
+        address: req.body["sign-up-address"]
+    };
+    
+    res.redirect('/dashboard');
+    //res.render('dashboard', { email: email, balance: balance })
 })
+
+
+
+
 
 module.exports = route;
