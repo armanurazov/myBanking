@@ -1,4 +1,4 @@
-const PORT = 8002;
+const PORT = 8000;
 const express = require('express');
 const exhbs = require('express-handlebars');
 const bodyParser = require('body-parser');

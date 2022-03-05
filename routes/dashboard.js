@@ -3,8 +3,6 @@ const userModel = require('../models/users');
 const route = express.Router();
 const userEmail = require('./signIn')
 
-// 
-
 /***************************** signed in user info ********************************/
 
 
