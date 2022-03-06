@@ -5,14 +5,14 @@ body{
 form{
     font-size: 14px;
 }
-
+::placeholder{
+    font-style: italic;
+    text-align: right;
+}
 .header-div{
-    text-align: center;
-    margin: 3px;
-    border: 1px solid black;
-    border-radius: 25px;
     padding: 15px;
-    margin: 15px;
+    margin: 5px;
+    text-align: center;
 }
 
 .transaction-div{
@@ -28,4 +28,16 @@ form{
     text-align: center;
     padding: 30px;
     margin: 30px;
+}
+.signup-div{
+    border: 1px solid black;
+    border-radius: 25px;
+    text-align: center;
+    padding: 30px;
+    margin: 30px;
+}
+
+.personal-info{
+    margin-left: auto; 
+    margin-right: 0;
 }

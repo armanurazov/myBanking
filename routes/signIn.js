@@ -21,14 +21,15 @@ route.post('/', (req, res) => {
 
     let errorMessage = '';
 
-    userModel.findOne({ 'email': email }, 'email password balance address', function (err, user) {
+    userModel.findOne({ 'email': email }, 'email password balance fname lname', function (err, user) {
         if (err) return handleError(err);
         if (email == user.email) {
             if (bcrypt.compareSync(password, user.password)) {   // function returns true if password matched the database hashed password
                 req.session.user = {
                     email: user.email,
                     balance: user.balance,
-                    address: user.address
+                    fname: user.fname,
+                    lname: user.lname
                 };
                 res.redirect('/dashboard');
             } else {

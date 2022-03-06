@@ -1,1 +1,31 @@
-This is Invest Page
+<div class="container">
+    <div class="row">
+        <div class="col text-right">
+            <h2>{{fname}} {{lname}}</h2>
+            Your current balance is:
+            {{balance}}<br><br>
+        </div>
+    </div>
+    <hr>
+
+<hr>
+<div class="container">
+    <div class="row">
+        <div class="col signin-div">
+            <form action='/invest' method="POST">
+                <label for="invest-apple">Apple</label><br>
+                <input type="number" name="invest-apple" id="invest-apple" placeholder="amount to invest"><br><br>
+                <label for="invest-microsoft">Microsoft</label><br>
+                <input type="number" name="invest-microsoft" id="invest-microsoft" placeholder="amount to invest"><br><br>
+                <label for="invest-dxc">DXC Technology</label><br>
+                <input type="number" name="invest-dxc" id="invest-dxc" placeholder="amount to invest"><br><br>
+                <label for="invest-xerox">Xerox</label><br>
+                <input type="number" name="invest-xerox" id="invest-xerox" placeholder="amount to invest"><br><br>
+                <label for="invest-ibm">IBM</label><br>
+                <input type="number" name="invest-ibm" id="invest-ibm" placeholder="amount to invest"><br><br>
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+    </div>
+</div>
+<hr>

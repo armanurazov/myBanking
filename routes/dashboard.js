@@ -29,6 +29,8 @@ route.get('/', (req, res) => {
                             {
                                 email: req.session.user.email,
                                 balance: req.session.user.balance,
+                                fname: req.session.user.fname,
+                                lname: req.session.user.lname,
                                 appleQuote: appleQuote,
                                 microsQuote: microsQuote,
                                 ibmQuote: ibmQuote,
