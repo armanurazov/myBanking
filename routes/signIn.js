@@ -20,27 +20,28 @@ route.post('/', (req, res) => {
     let password = req.body["sign-in-password"];
 
     let errorMessage = '';
-
-    userModel.findOne({ 'email': email }, 'email password balance fname lname', function (err, user) {
-        if (err) return handleError(err);
-        if (email == user.email) {
-            if (bcrypt.compareSync(password, user.password)) {   // function returns true if password matched the database hashed password
-                req.session.user = {
-                    email: user.email,
-                    balance: user.balance,
-                    fname: user.fname,
-                    lname: user.lname
-                };
-                res.redirect('/dashboard');
-            } else {
-                errorMessage = 'Invalid password'
+        userModel.findOne({ 'email': email }, 'email password balance fname lname', function (err, user) {
+            if(!user){
+                errorMessage = 'User Not Found'
                 res.render('home', { errorMessage: errorMessage });
-            };
-        } else {
-            errorMessage = 'User Not Found'
-            res.render('home', { errorMessage: errorMessage });
-        }
-    });
+            }else if (email == user.email) {
+                if (bcrypt.compareSync(password, user.password)) {   // function returns true if password matched the database hashed password
+                    req.session.user = {
+                        email: user.email,
+                        balance: user.balance,
+                        fname: user.fname,
+                        lname: user.lname
+                    };
+                    res.redirect('/dashboard');
+                } else {
+                    errorMessage = 'Invalid password'
+                    res.render('home', { errorMessage: errorMessage });
+                };
+            } else {
+                errorMessage = 'User Not Found'
+                res.render('home', { errorMessage: errorMessage });
+            }
+        });
 })
 
 
