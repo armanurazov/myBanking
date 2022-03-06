@@ -1,7 +1,6 @@
 body{
     font-family: 'Courier New', Courier, monospace;
 }
-
 form{
     font-size: 14px;
 }
@@ -14,29 +13,20 @@ form{
     margin: 5px;
     text-align: center;
 }
-
 .transaction-div{
     border: 1px solid black;
-    border-radius: 25px;
+    border-radius: 10px;
     text-align: center;
     height: 300px;
     margin: 40px;
 }
-.signin-div{
+.signin-div, .signup-div, .invest-row{
     border: 1px solid black;
-    border-radius: 25px;
+    border-radius: 10px;
     text-align: center;
     padding: 30px;
     margin: 30px;
 }
-.signup-div{
-    border: 1px solid black;
-    border-radius: 25px;
-    text-align: center;
-    padding: 30px;
-    margin: 30px;
-}
-
 .personal-info{
     margin-left: auto; 
     margin-right: 0;

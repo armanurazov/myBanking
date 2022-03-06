@@ -1,14 +1,12 @@
 # myBanking
-myBanking is the app to access your fictional bank account
+Fine, Easy is the app to access your fictional bank account
 
-The raw version is able to create user and log him/her in.
+The raw version is able to create user and log him/her in. 
+Deposit amount to the current acccount and withdraw the funds.
+Also transactions among registered users is available.
+Investment module enables buyng/selling selected stocks as per their current prices.
 
 yet to do:
-- (done) connect with database (MongoDB)
-- add CRUD functions accessing the database (update and delete user)
 - add back end data validation
-- (done) ensure security by hashing password and https protocol
-- add functionality to send money among users
-- display information to the user using express hadnlebars (dashboard)
-- apply cookies functionality to the app
+- invest module connecting to the database value of purchased shares
 - work on UI
