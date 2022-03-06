@@ -1,14 +1,46 @@
 const express = require('express');
 const userModel = require('../models/users');
 const route = express.Router();
-const userEmail = require('./signIn')
+const request = require('request');
+const cheerio = require('cheerio')
 
 /***************************** signed in user info ********************************/
 
 
 route.get('/', (req, res) => {
-    res.render('dashboard', { email: req.session.user.email, balance: req.session.user.balance });
-})
+
+    var appleQuote, microsQuote, ibmQuote, dxcQuote, xeroxQuote;
+    request('https://markets.businessinsider.com/stocks/aapl-stock', function (error, response, body) {
+        const $ = cheerio.load(body);
+        appleQuote = $(".price-section__current-value").text();
+        request('https://markets.businessinsider.com/stocks/msft-stock', function (error, response, body) {
+            const $ = cheerio.load(body);
+            microsQuote = $(".price-section__current-value").text();
+            request('https://markets.businessinsider.com/stocks/ibm-stock', function (error, response, body) {
+                const $ = cheerio.load(body);
+                ibmQuote = $(".price-section__current-value").text();
+                request('https://markets.businessinsider.com/stocks/dxc-stock', function (error, response, body) {
+                    const $ = cheerio.load(body);
+                    dxcQuote = $(".price-section__current-value").text();
+                    request('https://markets.businessinsider.com/stocks/xrx-stock', function (error, response, body) {
+                        const $ = cheerio.load(body);
+                        xeroxQuote = $(".price-section__current-value").text();
+                        res.render('dashboard',
+                            {
+                                email: req.session.user.email,
+                                balance: req.session.user.balance,
+                                appleQuote: appleQuote,
+                                microsQuote: microsQuote,
+                                ibmQuote: ibmQuote,
+                                dxcQuote: dxcQuote,
+                                xeroxQuote: xeroxQuote
+                            });
+                    })
+                })
+            })
+        })
+    })
+});
 
 route.post('/', (req, res) => {
 
@@ -89,6 +121,5 @@ route.post('/', (req, res) => {
     }
     res.render('dashboard', { email: req.session.user.email, balance: resultBalance });
 })
-
 
 module.exports = route;

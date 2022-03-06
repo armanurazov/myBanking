@@ -5,11 +5,12 @@ const bodyParser = require('body-parser');
 const signInRoute = require('./routes/signIn');
 const signUpRoute = require('./routes/signUp');
 const dashboardRoute = require('./routes/dashboard');
+const investRoute = require('./routes/invest')
 const mongoose = require('mongoose');
 const userSchema = require('./models/users');
-const clientSessions = require("client-sessions");
+const clientSessions = require('client-sessions');
 
-// const Parser = require('rss-parser');
+
 const app = express();
 
 app.use(express.static('public'))
@@ -49,6 +50,8 @@ app.use('/signin', signInRoute.route)
 app.use('/signup', signUpRoute)
 
 app.use('/dashboard', dashboardRoute)
+
+app.use('/invest', investRoute)
 
 
 app.listen(process.env.PORT || PORT, console.log('Connected to port: ' + PORT));

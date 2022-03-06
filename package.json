@@ -12,14 +12,19 @@
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.2",
+    "cheerio": "^1.0.0-rc.10",
     "client-sessions": "^0.8.0",
     "cookie-parser": "^1.4.6",
     "express": "^4.17.3",
     "express-handlebars": "^6.0.2",
     "express-session": "^1.17.2",
     "express-sessions": "^1.0.6",
+    "finnhub": "^1.2.11",
     "mongoose": "^6.2.2",
     "nodemon": "^2.0.15",
-    "rss-parser": "^3.12.0"
+    "request": "^2.88.2",
+    "rss-parser": "^3.12.0",
+    "yahoo-finance-webscraper": "^2.0.0",
+    "yahoo-stock-prices": "^1.1.0"
   }
 }
