@@ -16,7 +16,12 @@ const user = new Schema({
     country: String,
     cellNumber: String,
     prefComm: String,
-    balance: Number
+    balance: Number,
+    appleShares: Number,
+    microsoftShares: Number,
+    dxcShares: Number,
+    xeroxShares: Number,
+    ibmShares: Number
 })
 
 const userModel = mongoose.model('User', user);

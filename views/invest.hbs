@@ -6,8 +6,26 @@
             {{balance}}<br><br>
         </div>
     </div>
-    <hr>
-
+    <div class="row">
+        <div class="col text-right">
+            {{#if appleShares}}
+            AAPL shares: {{appleShares}}<br>
+            {{/if}}
+            {{#if microsoftShares}}
+            MSFT shares: {{microsoftShares}}<br>
+            {{/if}}
+            {{#if dxcShares}}
+            DXC shares: {{dxcShares}}<br>
+            {{/if}}
+            {{#if ibmShares}}
+            IBM shares: {{ibmShares}}<br>
+            {{/if}}
+            {{#if xeroxShares}}
+            XRX shares: {{xeroxShares}}<br>
+            {{/if}}
+        </div>
+    </div>
+</div>
 <hr>
 <div class="container">
     <div class="row">

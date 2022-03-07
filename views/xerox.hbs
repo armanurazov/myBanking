@@ -1,0 +1,77 @@
+<div class="container">
+    <div class="row">
+        <div class="col text-right">
+            <h2>{{fname}} {{lname}}</h2>
+            Your current balance is:
+            {{balance}}<br><br>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col text-right">
+            {{#if appleShares}}
+            AAPL shares: {{appleShares}}<br>
+            {{/if}}
+            {{#if microsoftShares}}
+            MSFT shares: {{microsoftShares}}<br>
+            {{/if}}
+            {{#if dxcShares}}
+            DXC shares: {{dxcShares}}<br>
+            {{/if}}
+            {{#if ibmShares}}
+            IBM shares: {{ibmShares}}<br>
+            {{/if}}
+            {{#if xeroxShares}}
+            XRX shares: {{xeroxShares}}<br>
+            {{/if}}
+        </div>
+    </div>
+</div>
+<hr>
+
+<div class="container">
+    <div class="row">
+        <div class="col signin-div">
+            <form action='/invest/xerox' method="POST">
+                <label for="invest-xerox">Xerox</label><br>
+                <select name="action">
+                    <option value="buy">Buy</option>
+                    <option value="sell">Sell</option>
+                </select>
+                <input type="number" name="invest-xerox" id="invest-xerox" placeholder="USD"><br><br>
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+    </div>
+</div>
+<hr>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-3 share-logo"></div>
+        <div class="col-3 share-logo">
+            <br><br>
+            <h3>NASDAQ: XRX</h3>
+        </div>
+        <div class="col-3 share-logo">
+            <img src="data:image/png;base64,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"
+                width='300px'>
+        </div>
+        <div class="col-3 share-logo"></div>
+    </div>
+    <div class="row">
+        <div class="col-3"></div>
+        <div class="col-6 about">
+            <p>
+                Xerox is an original equipment manufacturing and software company. Xerox operates in one
+                segment--design, development, and sale of printing technology and related solutions--while deriving 60%
+                of its revenue from the U.S. and 40% from international markets. The company is an OEM of multifunction
+                printers, or MFPs (printers that can print, copy, and scan), focusing on large enterprise markets. Apart
+                from equipment, the company provides post-sales services like managed print services--a service that
+                helps to bring smart servicing and efficiencies to how employers use their print/copy equipment. Xerox
+                is attempting to enter new markets like digital print packaging solutions and printed electronics.
+            </p>
+        </div>
+        <div class="col-3"></div>
+    </div>
+</div>

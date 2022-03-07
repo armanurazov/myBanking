@@ -26,7 +26,12 @@ route.post('/', (req, res) => {
         country: req.body["sign-up-country"],
         cellNumber: req.body["sign-up-cell-number"],   //need to change the type from Number (to String?)
         prefComm: req.body["sign-up-preferred-comm"],
-        balance: 0   // instantiated with zero for a new user, will be able to top up in the dashboard
+        balance: 0,   // instantiated with zero for a new user, will be able to top up in the dashboard
+        appleShares: 0,
+        microsoftShares: 0,
+        dxcShares: 0,
+        xeroxShares: 0,
+        ibmShares: 0
     })
 
     user1.save()

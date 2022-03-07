@@ -6,58 +6,78 @@
             {{balance}}<br><br>
         </div>
     </div>
-    <hr>
-
-    <div class="container">
-        <div class="row invest-row">
-            <div class="col invest-div">
-               Invest
-            </div>
-            <div class="col invest-div">
-                <a href="/invest/apple">AAPL: {{appleQuote}}</a>
-            </div>
-            <div class="col invest-div">
-                <a href="/invest/microsoft">MSFT: {{microsQuote}}</a>
-            </div>
-            <div class="col invest-div">
-                <a href="/invest/dxc">DXC: {{dxcQuote}}</a>
-            </div>
-            <div class="col invest-div">
-                <a href="/invest/ibm">IBM: {{ibmQuote}}</a>
-            </div>
-            <div class="col invest-div">
-                <a href="/invest/xerox">XRX: {{xeroxQuote}}</a>
-            </div>
+    <div class="row">
+        <div class="col text-right">
+            {{#if appleShares}}
+            AAPL shares: {{appleShares}}<br>
+            {{/if}}
+            {{#if microsoftShares}}
+            MSFT shares: {{microsoftShares}}<br>
+            {{/if}}
+            {{#if dxcShares}}
+            DXC shares: {{dxcShares}}<br>
+            {{/if}}
+            {{#if ibmShares}}
+            IBM shares: {{ibmShares}}<br>
+            {{/if}}
+            {{#if xeroxShares}}
+            XRX shares: {{xeroxShares}}<br>
+            {{/if}}
         </div>
     </div>
+</div>
+<hr>
 
-    <div class="container">
-        <div class="row">
-            <div class="col transaction-div">
-                <a>Deposit money</a><br><br>
-                <form action='/dashboard' method="POST">
-                    <label for="deposit-amoun">Amount to deposit:</label><br>
-                    <input type="number" name="deposit-amount" id="deposit-amount" placeholder="USD"><br><br>
-                    <input type="submit" value="Confirm action">
-                </form>
-            </div>
-            <div class="col transaction-div">
-                <a>Withdraw money</a><br><br>
-                <form action='/dashboard' method="POST">
-                    <label for="withdraw-amount">Amount to withdraw:</label><br>
-                    <input type="number" name="withdraw-amount" id="withdraw-amount" placeholder="USD"><br><br>
-                    <input type="submit" value="Confirm action">
-                </form>
-            </div>
-            <div class="col transaction-div">
-                <a>Send money</a><br><br>
-                <form action='/dashboard' method="POST">
-                    <label for="send-amount">Amount to send:</label><br>
-                    <input type="number" name="send-amount" id="send-amount" placeholder="USD"><br>
-                    <label for="send-email">Reciever email:</label><br>
-                    <input type="email" name="send-email" id="send-email"><br><br>
-                    <input type="submit" value="Confirm action">
-                </form>
-            </div>
+<div class="container">
+    <div class="row invest-row">
+        <div class="col invest-div">
+            Invest
+        </div>
+        <div class="col invest-div">
+            <a href="/invest/apple">AAPL: {{appleQuote}}</a>
+        </div>
+        <div class="col invest-div">
+            <a href="/invest/microsoft">MSFT: {{microsQuote}}</a>
+        </div>
+        <div class="col invest-div">
+            <a href="/invest/dxc">DXC: {{dxcQuote}}</a>
+        </div>
+        <div class="col invest-div">
+            <a href="/invest/ibm">IBM: {{ibmQuote}}</a>
+        </div>
+        <div class="col invest-div">
+            <a href="/invest/xerox">XRX: {{xeroxQuote}}</a>
         </div>
     </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col transaction-div">
+            <a>Deposit money</a><br><br>
+            <form action='/dashboard' method="POST">
+                <label for="deposit-amoun">Amount to deposit:</label><br>
+                <input type="number" name="deposit-amount" id="deposit-amount" placeholder="USD"><br><br>
+                <input type="submit" value="Confirm action">
+            </form>
+        </div>
+        <div class="col transaction-div">
+            <a>Withdraw money</a><br><br>
+            <form action='/dashboard' method="POST">
+                <label for="withdraw-amount">Amount to withdraw:</label><br>
+                <input type="number" name="withdraw-amount" id="withdraw-amount" placeholder="USD"><br><br>
+                <input type="submit" value="Confirm action">
+            </form>
+        </div>
+        <div class="col transaction-div">
+            <a>Send money</a><br><br>
+            <form action='/dashboard' method="POST">
+                <label for="send-amount">Amount to send:</label><br>
+                <input type="number" name="send-amount" id="send-amount" placeholder="USD"><br>
+                <label for="send-email">Reciever email:</label><br>
+                <input type="email" name="send-email" id="send-email"><br><br>
+                <input type="submit" value="Confirm action">
+            </form>
+        </div>
+    </div>
+</div>

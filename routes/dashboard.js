@@ -8,7 +8,11 @@ const cheerio = require('cheerio')
 
 
 route.get('/', (req, res) => {
-
+if(req.session.user == null){
+    let errorMessage = "session expired"
+    res.render('home', {errorMessage: errorMessage});
+    return;
+}
     var appleQuote, microsQuote, ibmQuote, dxcQuote, xeroxQuote;
     request('https://markets.businessinsider.com/stocks/aapl-stock', function (error, response, body) {
         const $ = cheerio.load(body);
@@ -25,6 +29,11 @@ route.get('/', (req, res) => {
                     request('https://markets.businessinsider.com/stocks/xrx-stock', function (error, response, body) {
                         const $ = cheerio.load(body);
                         xeroxQuote = $(".price-section__current-value").text();
+                        req.session.user.appleQuote = appleQuote;
+                        req.session.user.microsQuote = microsQuote;
+                        req.session.user.ibmQuote = ibmQuote;
+                        req.session.user.dxcQuote = dxcQuote;
+                        req.session.user.xeroxQuote = xeroxQuote;
                         res.render('dashboard',
                             {
                                 email: req.session.user.email,
@@ -35,7 +44,12 @@ route.get('/', (req, res) => {
                                 microsQuote: microsQuote,
                                 ibmQuote: ibmQuote,
                                 dxcQuote: dxcQuote,
-                                xeroxQuote: xeroxQuote
+                                xeroxQuote: xeroxQuote,
+                                appleShares: req.session.user.appleShares,
+                                microsoftShares: req.session.user.microsoftShares,
+                                dxcShares: req.session.user.dxcShares,
+                                xeroxShares: req.session.user.xeroxShares,
+                                ibmShares: req.session.user.ibmShares
                             });
                     })
                 })
@@ -122,9 +136,21 @@ route.post('/', (req, res) => {
         req.session.user.balance = resultBalance;
     }
     res.render('dashboard', {                                 
+        email: req.session.user.email,
         balance: req.session.user.balance,
         fname: req.session.user.fname,
-        lname: req.session.user.lname, });
+        lname: req.session.user.lname,
+        appleQuote: req.session.user.appleQuote,
+        microsQuote: req.session.user.microsQuote,
+        ibmQuote: req.session.user.ibmQuote,
+        dxcQuote: req.session.user.dxcQuote,
+        xeroxQuote: req.session.user.xeroxQuote,
+        appleShares: req.session.user.appleShares,
+        microsoftShares: req.session.user.microsoftShares,
+        dxcShares: req.session.user.dxcShares,
+        xeroxShares: req.session.user.xeroxShares,
+        ibmShares: req.session.user.ibmShares
+    });
 })
 
 module.exports = route;

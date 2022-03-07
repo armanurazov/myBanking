@@ -20,7 +20,7 @@ route.post('/', (req, res) => {
     let password = req.body["sign-in-password"];
 
     let errorMessage = '';
-        userModel.findOne({ 'email': email }, 'email password balance fname lname', function (err, user) {
+        userModel.findOne({ 'email': email }, 'email password balance fname lname appleShares microsoftShares dxcShares xeroxShares ibmShares', function (err, user) {
             if(!user){
                 errorMessage = 'User Not Found'
                 res.render('home', { errorMessage: errorMessage });
@@ -30,7 +30,12 @@ route.post('/', (req, res) => {
                         email: user.email,
                         balance: user.balance,
                         fname: user.fname,
-                        lname: user.lname
+                        lname: user.lname,
+                        appleShares: user.appleShares,
+                        microsoftShares: user.microsoftShares,
+                        dxcShares: user.dxcShares,
+                        xeroxShares: user.xeroxShares,
+                        ibmShares: user.ibmShares
                     };
                     res.redirect('/dashboard');
                 } else {
