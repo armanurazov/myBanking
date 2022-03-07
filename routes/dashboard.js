@@ -121,7 +121,10 @@ route.post('/', (req, res) => {
         resultBalance = currentBalance;
         req.session.user.balance = resultBalance;
     }
-    res.render('dashboard', { email: req.session.user.email, balance: resultBalance });
+    res.render('dashboard', {                                 
+        balance: req.session.user.balance,
+        fname: req.session.user.fname,
+        lname: req.session.user.lname, });
 })
 
 module.exports = route;
