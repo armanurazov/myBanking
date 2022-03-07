@@ -8,54 +8,68 @@ const cheerio = require('cheerio')
 
 
 route.get('/', (req, res) => {
-if(req.session.user == null){
-    let errorMessage = "session expired"
-    res.render('home', {errorMessage: errorMessage});
-    return;
-}
-    var appleQuote, microsQuote, ibmQuote, dxcQuote, xeroxQuote;
-    request('https://markets.businessinsider.com/stocks/aapl-stock', function (error, response, body) {
-        const $ = cheerio.load(body);
-        appleQuote = $(".price-section__current-value").text();
-        request('https://markets.businessinsider.com/stocks/msft-stock', function (error, response, body) {
+    if (req.session.user == null) {
+        let errorMessage = "session expired"
+        res.render('home', { errorMessage: errorMessage });
+        return;
+    }
+    userModel.findOne({ 'email': req.session.user.email }, 'email password balance fname lname appleShares microsoftShares dxcShares xeroxShares ibmShares', function (err, user) {
+        req.session.user = {
+            email: user.email,
+            balance: user.balance,
+            fname: user.fname,
+            lname: user.lname,
+            appleShares: user.appleShares,
+            microsoftShares: user.microsoftShares,
+            dxcShares: user.dxcShares,
+            xeroxShares: user.xeroxShares,
+            ibmShares: user.ibmShares
+        };
+        var appleQuote, microsQuote, ibmQuote, dxcQuote, xeroxQuote;
+        request('https://markets.businessinsider.com/stocks/aapl-stock', function (error, response, body) {
             const $ = cheerio.load(body);
-            microsQuote = $(".price-section__current-value").text();
-            request('https://markets.businessinsider.com/stocks/ibm-stock', function (error, response, body) {
+            appleQuote = $(".price-section__current-value").text();
+            request('https://markets.businessinsider.com/stocks/msft-stock', function (error, response, body) {
                 const $ = cheerio.load(body);
-                ibmQuote = $(".price-section__current-value").text();
-                request('https://markets.businessinsider.com/stocks/dxc-stock', function (error, response, body) {
+                microsQuote = $(".price-section__current-value").text();
+                request('https://markets.businessinsider.com/stocks/ibm-stock', function (error, response, body) {
                     const $ = cheerio.load(body);
-                    dxcQuote = $(".price-section__current-value").text();
-                    request('https://markets.businessinsider.com/stocks/xrx-stock', function (error, response, body) {
+                    ibmQuote = $(".price-section__current-value").text();
+                    request('https://markets.businessinsider.com/stocks/dxc-stock', function (error, response, body) {
                         const $ = cheerio.load(body);
-                        xeroxQuote = $(".price-section__current-value").text();
-                        req.session.user.appleQuote = appleQuote;
-                        req.session.user.microsQuote = microsQuote;
-                        req.session.user.ibmQuote = ibmQuote;
-                        req.session.user.dxcQuote = dxcQuote;
-                        req.session.user.xeroxQuote = xeroxQuote;
-                        res.render('dashboard',
-                            {
-                                email: req.session.user.email,
-                                balance: req.session.user.balance,
-                                fname: req.session.user.fname,
-                                lname: req.session.user.lname,
-                                appleQuote: appleQuote,
-                                microsQuote: microsQuote,
-                                ibmQuote: ibmQuote,
-                                dxcQuote: dxcQuote,
-                                xeroxQuote: xeroxQuote,
-                                appleShares: req.session.user.appleShares,
-                                microsoftShares: req.session.user.microsoftShares,
-                                dxcShares: req.session.user.dxcShares,
-                                xeroxShares: req.session.user.xeroxShares,
-                                ibmShares: req.session.user.ibmShares
-                            });
+                        dxcQuote = $(".price-section__current-value").text();
+                        request('https://markets.businessinsider.com/stocks/xrx-stock', function (error, response, body) {
+                            const $ = cheerio.load(body);
+                            xeroxQuote = $(".price-section__current-value").text();
+                            req.session.user.appleQuote = appleQuote;
+                            req.session.user.microsQuote = microsQuote;
+                            req.session.user.ibmQuote = ibmQuote;
+                            req.session.user.dxcQuote = dxcQuote;
+                            req.session.user.xeroxQuote = xeroxQuote;
+                            res.render('dashboard',
+                                {
+                                    email: req.session.user.email,
+                                    balance: req.session.user.balance,
+                                    fname: req.session.user.fname,
+                                    lname: req.session.user.lname,
+                                    appleQuote: appleQuote,
+                                    microsQuote: microsQuote,
+                                    ibmQuote: ibmQuote,
+                                    dxcQuote: dxcQuote,
+                                    xeroxQuote: xeroxQuote,
+                                    appleShares: req.session.user.appleShares,
+                                    microsoftShares: req.session.user.microsoftShares,
+                                    dxcShares: req.session.user.dxcShares,
+                                    xeroxShares: req.session.user.xeroxShares,
+                                    ibmShares: req.session.user.ibmShares
+                                });
+                        })
                     })
                 })
             })
         })
     })
+
 });
 
 route.post('/', (req, res) => {
@@ -135,7 +149,7 @@ route.post('/', (req, res) => {
         resultBalance = currentBalance;
         req.session.user.balance = resultBalance;
     }
-    res.render('dashboard', {                                 
+    res.render('dashboard', {
         email: req.session.user.email,
         balance: req.session.user.balance,
         fname: req.session.user.fname,

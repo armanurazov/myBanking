@@ -39,9 +39,16 @@ route.post('/', (req, res) => {
         .catch(console.error());
 
     req.session.user = {
+        fname: req.body["sign-up-fname"],
+        lname: req.body["sign-up-lname"],
         email: req.body["sign-up-email"],
         balance: 0,
-        address: req.body["sign-up-address"]
+        address: req.body["sign-up-address"],
+        appleShares: 0,
+        microsoftShares: 0,
+        dxcShares: 0,
+        xeroxShares: 0,
+        ibmShares: 0
     };
     
     res.redirect('/dashboard');

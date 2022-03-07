@@ -13,5 +13,8 @@ yet to do:
 - fix some redirections, from invest route header link don't work
 - add dashboard link button for logged in user
 - update the home page, more content
+- sign up only unique emails 
+- stock purchase only with positive balance
+- shares display double presicion
 - work on UI
 
