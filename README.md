@@ -16,5 +16,6 @@ yet to do:
 - sign up only unique emails 
 - stock purchase only with positive balance
 - shares display double presicion
+- send money - if no receiver found => show error 
 - work on UI
 

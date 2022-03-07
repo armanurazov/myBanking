@@ -116,7 +116,7 @@ route.post('/', (req, res) => {
         let receiverEmail = req.body["send-email"];
         let receiverBalanceCurrent;
         resultBalance = currentBalance - sendAmount;
-
+        req.session.user.balance = resultBalance;
         userModel.findOne(
             {
                 email: receiverEmail
