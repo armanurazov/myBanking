@@ -29,12 +29,22 @@
             <div class="col header-div">
                 <a href="/">Home</a>
             </div>
+            {{#unless email}}
             <div class="col header-div">
-                <a href="signin">Sign in</a>
+                <a href="/signin">Sign in</a>
             </div>
             <div class="col header-div">
-                <a href="signup">Sign up</a>
+                <a href="/signup">Sign up</a>
             </div>
+            {{/unless}}
+            {{#if email}}
+            <div class="col header-div">
+                <a href="/dashboard">Dashboard</a>
+            </div>
+            <div class="col header-div">
+                <a href="/signout">Sign Out</a>
+            </div>
+            {{/if}}
         </div>
     </div>
 

@@ -10,8 +10,8 @@ Investment module enables buyng/selling selected stocks as per their current pri
 
 yet to do:
 - add back end data validation
-- fix some redirections, from invest route header link don't work
-- add dashboard link button for logged in user
+- (fixed) fix some redirections, from invest route header link don't work
+- (fixed) add dashboard link button for logged in user
 - update the home page, more content
 - sign up only unique emails 
 - stock purchase only with positive balance

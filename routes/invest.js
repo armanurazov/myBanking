@@ -7,6 +7,11 @@ const cheerio = require('cheerio');
 
 
 route.get('/', (req, res) => {
+    if (req.session.user == null) {
+        let errorMessage = "session expired"
+        res.render('home', { errorMessage: errorMessage });
+        return;
+    }
     res.render('invest',
         {
             email: req.session.user.email,
@@ -21,6 +26,11 @@ route.get('/', (req, res) => {
         });
 })
 route.get('/apple', (req, res) => {
+    if (req.session.user == null) {
+        let errorMessage = "session expired"
+        res.render('home', { errorMessage: errorMessage });
+        return;
+    }
     res.render('apple', {
         email: req.session.user.email,
         balance: req.session.user.balance,
@@ -82,6 +92,11 @@ route.post('/apple', (req, res) => {
 })
 
 route.get('/microsoft', (req, res) => {
+    if (req.session.user == null) {
+        let errorMessage = "session expired"
+        res.render('home', { errorMessage: errorMessage });
+        return;
+    }
     res.render('microsoft', {
         email: req.session.user.email,
         balance: req.session.user.balance,
@@ -151,6 +166,11 @@ route.post('/microsoft', (req, res) => {
 
 
 route.get('/ibm', (req, res) => {
+    if (req.session.user == null) {
+        let errorMessage = "session expired"
+        res.render('home', { errorMessage: errorMessage });
+        return;
+    }
     res.render('ibm', {
         email: req.session.user.email,
         balance: req.session.user.balance,
@@ -212,6 +232,11 @@ route.post('/ibm', (req, res) => {
 })
 
 route.get('/xerox', (req, res) => {
+    if (req.session.user == null) {
+        let errorMessage = "session expired"
+        res.render('home', { errorMessage: errorMessage });
+        return;
+    }
     res.render('xerox', {
         email: req.session.user.email,
         balance: req.session.user.balance,
@@ -273,6 +298,11 @@ route.post('/xerox', (req, res) => {
 })
 
 route.get('/dxc', (req, res) => {
+    if (req.session.user == null) {
+        let errorMessage = "session expired"
+        res.render('home', { errorMessage: errorMessage });
+        return;
+    }
     res.render('dxc', {
         email: req.session.user.email,
         balance: req.session.user.balance,

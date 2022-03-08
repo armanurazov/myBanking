@@ -3,6 +3,7 @@ const express = require('express');
 const exhbs = require('express-handlebars');
 const bodyParser = require('body-parser');
 const signInRoute = require('./routes/signIn');
+const signOutRoute = require('./routes/signOut');
 const signUpRoute = require('./routes/signUp');
 const dashboardRoute = require('./routes/dashboard');
 const investRoute = require('./routes/invest')
@@ -48,6 +49,8 @@ app.get('/', (req, res) => {
 app.use('/signin', signInRoute.route)
 
 app.use('/signup', signUpRoute)
+
+app.use('/signout', signOutRoute.route)
 
 app.use('/dashboard', dashboardRoute)
 
